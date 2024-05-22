@@ -1,2 +1,1 @@
-# dataset
-DNS tunnel packet capture (pcap) dataset
+# DNS tunnel packet capture (pcap) dataset

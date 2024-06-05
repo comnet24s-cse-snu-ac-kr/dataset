@@ -22,7 +22,7 @@ run: build
 
 clean:
 	rm -f $(BINARY)*
-	find pcaps/ -name '*.json' | xargs -n1 rm -f
+	find pcaps -name '*.json' | xargs -n1 rm -f
 
 fmt:
 	go fmt ./...
@@ -34,6 +34,9 @@ test:
 	go test ${GO_FILES} -v
 
 conv: build
-	find pcaps/ -name '*.pcap' | xargs -n1 ./$(BINARY)
+	find pcaps -name '*.pcap' | xargs -n1 ./$(BINARY)
+
+pack: conv
+	tar -czvf ${BUILD}/dataset.tar.gz pcaps
 
 .PHONY: all build run clean test fmt lint deps help

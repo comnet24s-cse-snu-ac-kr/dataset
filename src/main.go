@@ -32,13 +32,11 @@ func main() {
   )
 
   for i, pcap := range pcaps {
-    var packetType string
     if pcap.(*layers.DNS).QR == true /*DNS Response */ {
-      packetType = "response"
-    } else {
-      packetType = "query"
+      bar.Add(1)
+      continue
     }
-    if err := WriteFile(pcap, fmt.Sprintf("%s-%s-%05d.json", pcapFileNameWithNoExtension, packetType, i)); err != nil {
+    if err := WriteFile(pcap, fmt.Sprintf("%s-%05d.json", pcapFileNameWithNoExtension, i)); err != nil {
       fmt.Println("error:", err)
       return
     }

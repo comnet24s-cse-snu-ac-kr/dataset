@@ -22,7 +22,15 @@ func main() {
     fmt.Println("error:", err)
   }
 
-  bar := progressbar.Default(int64(len(pcaps)))
+  bar := progressbar.NewOptions(len(pcaps),
+    progressbar.OptionSetWidth(30),
+    progressbar.OptionShowCount(),
+    progressbar.OptionSetPredictTime(false),
+    progressbar.OptionShowDescriptionAtLineEnd(),
+    progressbar.OptionShowElapsedTimeOnFinish(),
+    progressbar.OptionSetDescription(fmt.Sprintf("%s", pcapFileName)),
+  )
+
   for i, pcap := range pcaps {
     var packetType string
     if pcap.(*layers.DNS).QR == true /*DNS Response */ {

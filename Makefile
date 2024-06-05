@@ -12,20 +12,17 @@ all: build
 build:
 	go build ${LDFLAGS} -o ${BINARY} ${GO_FILES}
 
-build-all: build-arm build-amd
+build-all: build-arm
 
 build-arm:
 	GOOS=darwin GOARCH=arm64 go build ${LDFLAGS} -o ${BUILD}/${BINARY}-darwin-arm64 ${GO_FILES}
-
-build-amd:
-	GOOS=darwin GOARCH=amd64 go build ${LDFLAGS} -o ${BUILD}/${BINARY}-darwin-amd64 ${GO_FILES}
 
 run: build
 	./$(BINARY)
 
 clean:
 	rm -f $(BINARY)*
-	find . -name '*.json' | xargs -n1 rm -f
+	find pcaps/ -name '*.json' | xargs -n1 rm -f
 
 fmt:
 	go fmt ./...
@@ -37,6 +34,6 @@ test:
 	go test ${GO_FILES} -v
 
 conv: build
-	find . -name '*.pcap' | xargs -n1 ./$(BINARY)
+	find pcaps/ -name '*.pcap' | xargs -n1 ./$(BINARY)
 
 .PHONY: all build run clean test fmt lint deps help

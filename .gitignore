@@ -26,3 +26,4 @@ ztmb-conv-json
 
 # Helper scripts
 *.sh
+*.json

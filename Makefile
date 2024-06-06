@@ -18,19 +18,11 @@ build-arm:
 	GOOS=darwin GOARCH=arm64 go build ${LDFLAGS} -o ${BUILD}/${BINARY}-darwin-arm64 ${GO_FILES}
 
 run: build
-<<<<<<< HEAD
-	./$(BINARY)
-
-clean:
-	rm -f $(BINARY)*
-	find pcaps -name '*.json' | xargs -n1 rm -f
-=======
 	find pcaps -name '*.pcap' | xargs -n1 ./${BINARY}
 
 clean:
 	rm -vrf ${BINARY}* dataset
 	find pcaps -name '*.json' | xargs -n1 rm -vrf
->>>>>>> 592d72f (tmp: add all)
 
 fmt:
 	go fmt ./...

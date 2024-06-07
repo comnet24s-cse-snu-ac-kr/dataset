@@ -27,4 +27,5 @@ ztmb-conv-json
 # Helper scripts
 *.sh
 *.json
+*.log
 dataset

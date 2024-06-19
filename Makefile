@@ -22,8 +22,15 @@ build-linux-amd:
 run: build
 	find pcaps -name '*.pcap' | xargs -n1 ./${BINARY}
 
+tar:
+	cd ./pcaps/ && tar --exclude *.pcap -czvf benign.tar.gz benign/
+	cd ./pcaps/ && tar --exclude *.pcap -czvf dns2tcp.tar.gz dns2tcp/
+	cd ./pcaps/ && tar --exclude *.pcap -czvf dnscapy.tar.gz dnscapy/
+	cd ./pcaps/ && tar --exclude *.pcap -czvf iodine.tar.gz iodine/
+	cd ./pcaps/ && tar --exclude *.pcap -czvf tuns.tar.gz tuns/
+	mv pcaps/*.tar.gz build/
+
 clean:
-	rm -vrf ${BINARY}* dataset
 	find pcaps -name '*.json' | xargs -n1 rm -vrf
 
 fmt:
